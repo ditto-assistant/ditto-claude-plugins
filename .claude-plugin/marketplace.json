@@ -1,0 +1,21 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "ditto-claude-plugins",
+  "description": "Ditto's official Claude Code plugins — give Claude a persistent, personal memory graph with zero-OAuth agent-native login.",
+  "owner": {
+    "name": "Ditto (Omni Aura)",
+    "email": "support@heyditto.ai"
+  },
+  "plugins": [
+    {
+      "name": "ditto",
+      "description": "Turns Claude Code into Ditto: automatic memory recall on every prompt and write-back of salient turns, backed by your Ditto memory graph. Agent-native login via @heyditto/cli means setup is one command and never gets de-authorized like MCP OAuth.",
+      "author": {
+        "name": "Ditto (Omni Aura)"
+      },
+      "category": "productivity",
+      "source": "./plugins/ditto",
+      "homepage": "https://heyditto.ai"
+    }
+  ]
+}
