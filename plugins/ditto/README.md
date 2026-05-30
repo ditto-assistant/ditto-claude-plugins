@@ -6,32 +6,26 @@
 
 | Hook | Behavior |
 |---|---|
-| **SessionStart** | Ensures a Ditto agent account exists. If none, it provisions a free **claimable agent account** (`ditto init --agent`) — no browser, no OAuth — and surfaces a claim URL so you can later own its memories. |
+| **SessionStart** | Ensures the CLI is present (auto-installs it on first run if missing — see below) and a Ditto agent account exists. If none, it provisions a free **claimable agent account** (`ditto init --agent`) — no browser, no OAuth — and surfaces a claim URL so you can later own its memories. |
 | **UserPromptSubmit** | Semantically searches your prompt against your Ditto graph and injects the most relevant memories as context. This is the "recall" that makes Claude feel like it remembers you. |
 | **Stop / PreCompact** | Writes the latest exchange back to your memory graph (`--source claude-code`), so what you do in Claude Code is remembered everywhere Ditto is. Skipped on read-only agents. |
 
 Plus slash commands: `/ditto-recall`, `/ditto-save`, `/ditto-whoami`, `/ditto-claim`, `/ditto-login`, and a `ditto-memory` skill for deliberate memory work.
 
-## Prerequisite
-
-The plugin drives the [`@heyditto/cli`](https://www.npmjs.com/package/@heyditto/cli) binary. Install it once:
-
-```bash
-npm install -g @heyditto/cli
-```
-
-> macOS ships `/usr/bin/ditto` (a file-copy utility). If the wrong tool runs, the CLI is also installed as `heyditto`. The plugin auto-detects either.
-
-The hooks **fail open**: if the CLI is missing or offline, nothing breaks — the session proceeds normally and Claude is told it can offer to install the CLI.
-
-## Setup
+## Setup — one step
 
 ```
 /plugin marketplace add ditto-assistant/ditto-claude-plugins
 /plugin install ditto@ditto-claude-plugins
 ```
 
-On your next session the plugin auto-provisions an agent account. To own its memories, run `/ditto-claim` and open the URL while signed in to https://app.heyditto.ai. To use an existing key instead: `/ditto-login <ditto_mcp_…>`.
+That's it. There is **no manual `npm install`**. The plugin drives the [`@heyditto/cli`](https://www.npmjs.com/package/@heyditto/cli) binary; on your first session, if it isn't already available, the `SessionStart` hook auto-installs it **into a contained cache dir** (`~/.cache/heyditto/cli` — *not* a global `-g` install, so no sudo and no PATH pollution) in the background and then provisions a claimable agent account. Recall and save activate automatically within a few seconds.
+
+To own the agent's memories, run `/ditto-claim` and open the URL while signed in to https://app.heyditto.ai. To use an existing key instead: `/ditto-login <ditto_mcp_…>`.
+
+> The plugin needs Node's `npm` (or `bun`) available for the auto-install. It also reuses any usable global `ditto`/`heyditto` (≥ 1.3.0) already on your PATH instead of installing its own. macOS note: Apple ships an unrelated `/usr/bin/ditto`; the plugin's version gate ignores it.
+
+The hooks **fail open**: if the CLI can't be installed (offline, no npm) nothing breaks — the session proceeds normally and Claude is told it can offer to set things up.
 
 ## Configuration (env vars, all optional)
 
@@ -41,7 +35,9 @@ On your next session the plugin auto-provisions an agent account. To own its mem
 | `DITTO_RECALL_LIMIT` | `5` | Max memories injected per prompt (1–15). |
 | `DITTO_AUTOSAVE` | on | Set to `0` to disable write-back on Stop/PreCompact (recall still works). |
 | `DITTO_MIN_PROMPT_LEN` | `8` | Minimum prompt length to trigger recall. |
-| `DITTO_BIN` | — | Explicit path to the `ditto`/`heyditto` binary. |
+| `DITTO_AUTO_INSTALL` | on | Set to `0` to disable the background CLI auto-install (falls back to a "run `npm i -g`" nudge). |
+| `DITTO_CLI_HOME` | `~/.cache/heyditto/cli` | Where the contained CLI install lives. |
+| `DITTO_BIN` | — | Explicit path to a `ditto`/`heyditto` binary (skips discovery/auto-install). |
 
 ## Privacy & control
 

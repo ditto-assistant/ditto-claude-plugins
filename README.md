@@ -9,11 +9,7 @@ Ditto's official [Claude Code](https://code.claude.com) plugin marketplace. Give
 /plugin install ditto@ditto-claude-plugins
 ```
 
-Then install the CLI the plugin drives:
-
-```bash
-npm install -g @heyditto/cli
-```
+That's the whole setup — **no manual `npm install`**. On first run the plugin auto-installs the [`@heyditto/cli`](https://www.npmjs.com/package/@heyditto/cli) helper it drives into a contained cache dir (`~/.cache/heyditto/cli`, not a global install) and provisions a claimable agent account in the background. (Requires `npm` or `bun` on PATH; set `DITTO_AUTO_INSTALL=0` to opt out.)
 
 ## Plugins
 

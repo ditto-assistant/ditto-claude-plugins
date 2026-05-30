@@ -20,7 +20,7 @@ Run `ditto status --output json`. It reports `apiKey.present` and `source` (`env
 
 - **Missing key** → agent-native login (no browser/OAuth): `ditto init --agent --agent-caller "Claude Code" --json`. This mints a free, claimable agent account, stores the key at `~/.config/heyditto/cli/config.json`, and prints a `claimURL`. Share the **claimURL** (not the API key) so the user can later own the agent. Do not ask for email/OTP/dashboard setup first.
 - **User has a key** → `ditto login <key>`.
-- **Binary missing** → `npm install -g @heyditto/cli` (macOS ships `/usr/bin/ditto`; if the wrong tool runs, use `heyditto`).
+- **Binary missing** → the plugin auto-installs it on `SessionStart` into `~/.cache/heyditto/cli` (no global install needed). If you must do it by hand: `npm install -g @heyditto/cli` (macOS ships an unrelated `/usr/bin/ditto`; if the wrong tool runs, use `heyditto`).
 
 A read-only agent account can search/fetch but not save; write calls will be rejected — tell the user to grant write access from **Settings → Agents** on heyditto.ai.
 
