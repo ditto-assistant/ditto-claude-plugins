@@ -8,7 +8,7 @@
 // plugin in its "CLI unavailable" state, which the hooks handle by no-op.
 
 import { execFileSync, spawnSync } from "node:child_process"
-import { existsSync, rmSync } from "node:fs"
+import { existsSync, rmSync, writeFileSync } from "node:fs"
 import os from "node:os"
 import path from "node:path"
 
@@ -57,6 +57,12 @@ try {
 
   const bin = managedBinPath()
   if (installed && existsSync(bin)) {
+    // Stamp the refresh marker so SessionStart throttles future auto-updates.
+    try {
+      writeFileSync(path.join(HOME, ".refreshed"), new Date().toISOString())
+    } catch {
+      /* ignore */
+    }
     // First-run agent login only if there's no key already.
     let hasKey = false
     try {

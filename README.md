@@ -23,6 +23,13 @@ On first session, the plugin runs `ditto init --agent` — minting a free, **cla
 
 Manage, pause, revoke, make read-only, or restrict which threads each agent can read from **Settings → Agents** on https://app.heyditto.ai.
 
+## Updating
+
+- **CLI** (`@heyditto/cli`): the plugin auto-refreshes its contained install to `@latest` in the background (~weekly; `DITTO_REFRESH_DAYS`). Force it now with `/ditto-update`.
+- **Plugin** (this repo): `/plugin marketplace update ditto-claude-plugins` then `/reload-plugins`, or enable auto-update in `/plugin` → Marketplaces. Each release bumps `plugins/ditto/.claude-plugin/plugin.json` `version`.
+
+Maintainer release process: [RELEASING.md](RELEASING.md).
+
 ## Repo layout
 
 ```

@@ -37,6 +37,9 @@ const RECALL_LIMIT = clampInt(process.env.DITTO_RECALL_LIMIT, 5, 1, 15)
 const MIN_PROMPT_LEN = clampInt(process.env.DITTO_MIN_PROMPT_LEN, 8, 1, 1000)
 const AUTOSAVE = process.env.DITTO_AUTOSAVE !== "0"
 const AUTO_INSTALL = process.env.DITTO_AUTO_INSTALL !== "0"
+// Auto-refresh the contained CLI to @latest when it's older than this many days
+// (background, non-blocking). 0 = refresh every session.
+const REFRESH_DAYS = clampInt(process.env.DITTO_REFRESH_DAYS, 7, 0, 3650)
 
 // Minimum CLI version the plugin relies on (the `init --agent` self-provision
 // flow landed in 1.3.x). A stale global (e.g. Apple's unrelated /usr/bin/ditto
@@ -129,6 +132,21 @@ function startBackgroundInstall() {
   }
 }
 
+// If we're running our own contained install and it's older than REFRESH_DAYS,
+// upgrade it to @latest in the background. No-op for PATH binaries (the user
+// owns those) and when auto-install is disabled. Never blocks.
+function maybeRefreshManaged(bin) {
+  if (!AUTO_INSTALL || bin !== managedBinPath()) return
+  const marker = path.join(cliHome(), ".refreshed")
+  let ageMs = Infinity
+  try {
+    ageMs = Date.now() - statSync(marker).mtimeMs
+  } catch {
+    /* no marker — treat as stale */
+  }
+  if (ageMs > REFRESH_DAYS * 24 * 60 * 60 * 1000) startBackgroundInstall()
+}
+
 // Run a ditto subcommand, returning trimmed stdout or null on any failure.
 function runDitto(args, { timeout = 15000, input } = {}) {
   const bin = dittoBin()
@@ -189,7 +207,8 @@ function hasKey(status) {
 // ---- event handlers ---------------------------------------------------------
 
 function onSessionStart() {
-  if (!dittoBin()) {
+  const bin = dittoBin()
+  if (!bin) {
     // No usable CLI yet. Auto-provision it in the background (contained install
     // + first-run agent login) so the user never has to run npm by hand.
     if (startBackgroundInstall()) {
@@ -206,6 +225,9 @@ function onSessionStart() {
         "(DITTO_AUTO_INSTALL=0). To enable persistent memory, run: `npm install -g @heyditto/cli`."
     )
   }
+
+  // Keep the contained CLI fresh (background, throttled to REFRESH_DAYS).
+  maybeRefreshManaged(bin)
 
   let status = dittoStatus()
 

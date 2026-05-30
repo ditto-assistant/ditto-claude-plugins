@@ -10,7 +10,7 @@
 | **UserPromptSubmit** | Semantically searches your prompt against your Ditto graph and injects the most relevant memories as context. This is the "recall" that makes Claude feel like it remembers you. |
 | **Stop / PreCompact** | Writes the latest exchange back to your memory graph (`--source claude-code`), so what you do in Claude Code is remembered everywhere Ditto is. Skipped on read-only agents. |
 
-Plus slash commands: `/ditto-recall`, `/ditto-save`, `/ditto-whoami`, `/ditto-claim`, `/ditto-login`, and a `ditto-memory` skill for deliberate memory work.
+Plus slash commands: `/ditto-recall`, `/ditto-save`, `/ditto-whoami`, `/ditto-claim`, `/ditto-login`, `/ditto-update`, and a `ditto-memory` skill for deliberate memory work.
 
 ## Setup — one step
 
@@ -27,6 +27,18 @@ To own the agent's memories, run `/ditto-claim` and open the URL while signed in
 
 The hooks **fail open**: if the CLI can't be installed (offline, no npm) nothing breaks — the session proceeds normally and Claude is told it can offer to set things up.
 
+## Updating
+
+There are two independent things to keep current:
+
+- **The CLI** (`@heyditto/cli`, the memory engine). The contained install **auto-refreshes to `@latest` in the background** roughly every 7 days (tune with `DITTO_REFRESH_DAYS`, `0` = every session). Want the newest version right now? Run `/ditto-update`.
+- **The plugin** (these hooks/commands/skill). That's handled by Claude Code, not the CLI. Refresh the marketplace and reload:
+  ```
+  /plugin marketplace update ditto-claude-plugins
+  /reload-plugins
+  ```
+  Or enable auto-update once via `/plugin` → **Marketplaces** → *Enable auto-update* (third-party marketplaces ship with it off by default), and new plugin versions land at startup.
+
 ## Configuration (env vars, all optional)
 
 | Var | Default | Effect |
@@ -36,6 +48,7 @@ The hooks **fail open**: if the CLI can't be installed (offline, no npm) nothing
 | `DITTO_AUTOSAVE` | on | Set to `0` to disable write-back on Stop/PreCompact (recall still works). |
 | `DITTO_MIN_PROMPT_LEN` | `8` | Minimum prompt length to trigger recall. |
 | `DITTO_AUTO_INSTALL` | on | Set to `0` to disable the background CLI auto-install (falls back to a "run `npm i -g`" nudge). |
+| `DITTO_REFRESH_DAYS` | `7` | How often to background-refresh the contained CLI to `@latest`. `0` = every session. |
 | `DITTO_CLI_HOME` | `~/.cache/heyditto/cli` | Where the contained CLI install lives. |
 | `DITTO_BIN` | — | Explicit path to a `ditto`/`heyditto` binary (skips discovery/auto-install). |
 
