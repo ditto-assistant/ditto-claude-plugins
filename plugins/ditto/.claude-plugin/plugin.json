@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "ditto",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Turns Claude Code into Ditto: automatic memory recall on every prompt and write-back of salient turns, backed by your Ditto memory graph. Agent-native login means zero-OAuth setup. Includes Ditto-informed music curation; playlist creation and playback require separate music or computer-control capabilities.",
   "author": {
     "name": "Ditto (Omni Aura)",

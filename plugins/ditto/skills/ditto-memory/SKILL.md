@@ -9,7 +9,7 @@ Use the connected Ditto account to carry useful context between conversations. A
 
 ## Connect and recall
 
-Use the available Ditto tools and the host connection guidance shipped with this skill. Never request credentials in chat. Inspect the live schemas or CLI capabilities before relying on tool names, scopes or limits.
+Use the connected Ditto MCP server and the host connection guidance shipped with this skill. Authenticate through the host's sign-in flow. Never request credentials in chat. Inspect the live MCP tool schemas and available resources before relying on tool names, scopes or limits. Both Ditto plugins use hosted MCP; do not install or invoke a CLI, provision an agent account, or substitute shell commands when the MCP connection is unavailable. Explain the connection gap and direct the user to the host's connection controls.
 
 Before answering from the user's history, preferences, people or projects, search relevant memories and fetch the supporting bodies. Use known memory IDs from the current task when available, especially after a recent write; an empty search or stale preview does not prove that context is absent. Keep retrieval bounded to the task. Use aggregate_memories for exact counts when available; search hits are not a total.
 
