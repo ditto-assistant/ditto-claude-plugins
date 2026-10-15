@@ -63,3 +63,18 @@ There are two independent things to keep current:
 - [`ditto-cli`](https://github.com/ditto-assistant/ditto-cli) — the `@heyditto/cli` source.
 - [`ditto-clawhub`](https://github.com/ditto-assistant/ditto-clawhub) / [`ditto-hermes`](https://github.com/ditto-assistant/ditto-hermes) — sibling skill bundles for OpenClaw and Hermes.
 - [`ditto-mcp`](https://github.com/ditto-assistant/ditto-mcp) — stdio MCP bridge with browser-OAuth for Claude Desktop / Cursor.
+
+## Music curation
+
+The bundled `curate-youtube-music` skill uses verified Ditto memories and, when
+authorized access is available, your existing YouTube Music playlists to curate
+an original, ordered selection. Try: "Curate a YouTube Music playlist using my
+Ditto memories for a relaxed evening, with a few discoveries."
+
+Creating or saving a playlist and controlling playback require a separately
+available music connector or supported computer/browser controls. If the host
+lacks those controls, the skill returns the ordered track selections and explains
+the limitation. The plugin does not add a Ditto music API or a music-account
+connection. Queue replacement and playback changes follow your explicit request.
+
+Adapted from Omar Barazanji's `curate-youtube-music` skill in heyditto-stack PR #115.
