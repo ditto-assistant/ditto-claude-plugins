@@ -1,48 +1,28 @@
 # Releasing
 
-This repo ships **two** things that update on different tracks. Keep them straight.
+The release contains hosted MCP connection metadata and shared skills. It does
+not distribute or refresh a CLI, run hooks or provision agent accounts.
 
-## 1. The plugin (this repo)
+1. Change host metadata, `.mcp.json` or the Claude adapter here. Change common skills
+   in `ditto-assistant/ditto-skills`; regenerate using its clean committed source.
+2. Bump `plugins/ditto/.claude-plugin/plugin.json` for a host change. The shared-skill
+   generator automatically patch-bumps changed skill content; avoid a second bump.
+3. Run the offline verifier, `python3 -m unittest discover -s tests -v`,
+   `python3 scripts/validate_package.py`, and `claude plugin validate ./plugins/ditto`.
+4. Open a PR and inspect current-head CI and Ditto Review. Merge only when authorized.
+   The marketplace tracks main, so merging updates the available plugin package.
+5. Refresh the marketplace and update Ditto in the actual host. Verify the installed
+   version, two skills and Ditto MCP connector. Authenticate through the host flow
+   and verify tools separately before claiming live memory behavior.
 
-The hooks, commands, and skill under `plugins/ditto/`. Distributed via the Claude Code
-marketplace (`.claude-plugin/marketplace.json`, source `./plugins/ditto`).
+Claude Code users can run `/plugin marketplace update ditto-claude-plugins` then
+`/reload-plugins`. Desktop users use Customize → Plugins. Running sessions may
+need a restart. Do not clear global plugin caches or delete unrelated credentials.
 
-**To release a plugin change:**
+The 0.3.0 migration replaces the former 0.2.x CLI implementation. Old CLI commands
+and lifecycle hooks are absent from the new bundle. It does not remove prior local
+CLI installations, credentials, agent accounts or saved memories. Host-managed
+OAuth replaces plugin-managed CLI keys; authentication may need reconnecting.
 
-1. Make the change under `plugins/ditto/`.
-2. **Bump `version`** in `plugins/ditto/.claude-plugin/plugin.json` (semver). This is the
-   signal Claude Code uses to detect an update — a push without a version bump will not be
-   picked up as a new version.
-3. Validate locally:
-   ```bash
-   node -e "JSON.parse(require('fs').readFileSync('.claude-plugin/marketplace.json','utf8'))"
-   node -e "JSON.parse(require('fs').readFileSync('plugins/ditto/.claude-plugin/plugin.json','utf8'))"
-   node --check plugins/ditto/hooks/ditto-hook.mjs
-   node --check plugins/ditto/hooks/bootstrap.mjs
-   ```
-4. Commit + push to `main`. The marketplace source has no pinned `ref`, so `main` is the
-   release channel.
-
-**How users get it:** `/plugin marketplace update ditto-claude-plugins` + `/reload-plugins`,
-or automatically if they enabled auto-update for the marketplace (`/plugin` → Marketplaces;
-third-party marketplaces default to auto-update **off**). Clearing `~/.claude/plugins/cache`
-forces a clean refresh.
-
-> If we ever want reproducible pinning, switch the marketplace `source` to
-> `git-subdir` with an explicit `ref`/`sha` (like the official catalog does) and bump the
-> ref per release. Not needed while we track `main`.
-
-## 2. The CLI (`@heyditto/cli`)
-
-Lives in the sibling [`ditto-cli`](https://github.com/ditto-assistant/ditto-cli) repo and
-publishes to npm via semantic-release on push to `main` (conventional commits → version).
-**This repo does not vendor or version the CLI.**
-
-The plugin installs the CLI into a contained dir (`~/.cache/heyditto/cli`) and
-**auto-refreshes it to `@latest`** in the background every `DITTO_REFRESH_DAYS` (default 7).
-So a CLI release reaches plugin users automatically within a week — or immediately via
-`/ditto-update`. No plugin version bump is required for a CLI-only change.
-
-**Compatibility:** the hook engine gates on `MIN_VERSION` (`ditto-hook.mjs`). If a future CLI
-release changes the JSON shape the hooks parse (e.g. `init --json` / `status --output json`
-fields), bump `MIN_VERSION` here and release a plugin version alongside the CLI change.
+Merging or installing a package is not a store submission. Directory submission,
+reviewer access, demos and functional host tests are separate release gates.
