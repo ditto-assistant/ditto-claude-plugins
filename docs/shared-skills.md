@@ -1,6 +1,6 @@
 # Shared skill releases
 
-The common memory workflow comes from the private `ditto-assistant/ditto-skills` source repo. Edit common behavior there. Edit this repository's `adapters/ditto-memory.md` for host-specific guidance; authentication, hooks, commands and server configuration remain owned here.
+The common memory and music-curation workflows come from the private `ditto-assistant/ditto-skills` source repo. Edit common behavior there. Edit this repository's `adapters/ditto-memory.md` for host-specific guidance; authentication, hooks, commands and server configuration remain owned here.
 
 The generated SKILL.md, offline verifier and shared-skills.lock.json are materialized files, not symlinks. The lock records the immutable source revision and content hashes. Run `python3 scripts/shared_skills.py verify --host claude --repo .` without private repo access. A maintainer with a clean source clone can run its generator with `build --source <clone> --repo . --host claude --bump-version`.
 
