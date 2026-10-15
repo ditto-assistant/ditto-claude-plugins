@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "source_repository": "https://github.com/ditto-assistant/ditto-skills",
+  "source_commit": "b18fbc8c6f3c78117bd8bd98093a1eb18cd7be79",
+  "host": "claude",
+  "core_sha256": "4008edf92c9fed31ded693aca4b996ef9003578d32bdf5746483846d393bf276",
+  "adapter_sha256": "5061fd56b1bb5c4c1237cf7514ea1d039118bcbbf6da7fe5946f8705aaeebe6c",
+  "generator_sha256": "8096bbb18946d0fa0841eb4abad47b4212a8c5e64e6f2f8be1c22621518e92a5",
+  "skill_sha256": "d7be314a84535aef5760055d6c52a11e58085b640d997fc93f90b32746dff12b",
+  "files_sha256": {}
+}

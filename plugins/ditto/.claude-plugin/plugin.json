@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "ditto",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Turns Claude Code into Ditto: automatic memory recall on every prompt and write-back of salient turns, backed by your Ditto memory graph. Agent-native login means zero-OAuth setup.",
   "author": {
     "name": "Ditto (Omni Aura)",
@@ -11,6 +11,14 @@
   "homepage": "https://heyditto.ai",
   "repository": "https://github.com/ditto-assistant/ditto-claude-plugins",
   "license": "MIT",
-  "keywords": ["ditto", "heyditto", "memory", "recall", "knowledge-graph", "mcp", "hooks"],
+  "keywords": [
+    "ditto",
+    "heyditto",
+    "memory",
+    "recall",
+    "knowledge-graph",
+    "mcp",
+    "hooks"
+  ],
   "hooks": "./hooks/hooks.json"
 }
