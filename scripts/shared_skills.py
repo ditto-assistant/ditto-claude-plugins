@@ -50,16 +50,36 @@ def source_identity(source):
     return subprocess.check_output(["git", "-C", str(source), "rev-parse", "HEAD"], text=True).strip()
 
 
+def catalog_names(source, catalog="memory"):
+    """Select an explicit surface; old source snapshots retain their catalog."""
+    config = file_at(source, "scripts/catalogs.json")
+    if not config.exists() and catalog == "memory":
+        return None
+    catalogs = json.loads(config.read_text())
+    names = catalogs.get(catalog)
+    if not isinstance(names, list) or not names or len(set(names)) != len(names):
+        raise ValueError("Unknown or invalid skill catalog")
+    for name in names:
+        if not isinstance(name, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", name):
+            raise ValueError("Invalid catalog skill name")
+        if not file_at(source, f"skills/{name}/SKILL.md").is_file():
+            raise ValueError("Catalog skill is missing")
+    return set(names)
+
+
 def additional_files(source):
     """New public-text skills/references are discovered without new host forks."""
     result = {}
     skill_root = file_at(source, "skills")
+    selected = catalog_names(source)
     for item in sorted(skill_root.rglob("*")):
         if item.is_symlink():
             raise ValueError("Symlink in canonical skills")
         if not item.is_file() or item == file_at(source, CORE):
             continue
         relative = item.relative_to(Path(source).resolve())
+        if selected is not None and relative.parts[1] not in selected:
+            continue
         if len(relative.parts) < 3 or not re.fullmatch(r"[a-z0-9-]+", relative.parts[1]):
             raise ValueError("Unexpected skill layout")
         if item.suffix not in {".md", ".json", ".yaml", ".yml", ".txt"}:
