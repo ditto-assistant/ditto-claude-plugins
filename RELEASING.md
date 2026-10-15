@@ -16,7 +16,10 @@ not distribute or refresh a CLI, run hooks or provision agent accounts.
    and verify tools separately before claiming live memory behavior.
 
 Claude Code users can run `/plugin marketplace update ditto-claude-plugins` then
-`/reload-plugins`. Desktop users use Customize → Plugins. Running sessions may
+`/reload-plugins`. Desktop Chat/Cowork users select Chat and Cowork, then use
+Customize → Plugins. Verify each surface separately: Code's local marketplace
+installation does not install the Chat/Cowork plugin. Confirm both bundled skills
+in a new Chat's `/` menu and the plugin's Connected MCP connector. Running sessions may
 need a restart. Do not clear global plugin caches or delete unrelated credentials.
 
 The 0.3.0 migration replaces the former 0.2.x CLI implementation. Old CLI commands

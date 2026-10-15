@@ -6,8 +6,15 @@ and authorized private saves or updates. Sign in through Claude's connection flo
 
 ## Install
 
-In Claude desktop, add `ditto-assistant/ditto-claude-plugins` as a marketplace under
-Customize → Plugins, then add Ditto. In Claude Code:
+For **Claude Chat or Cowork**, select **Chat and Cowork** in Claude desktop first.
+Open Customize → Plugins → Add → Add marketplace → Add from a repository, select
+`ditto-assistant/ditto-claude-plugins`, and Sync. Add Ditto from that marketplace.
+Under Yours, verify Ditto is enabled, Skills lists `curate-music` and `ditto-memory`,
+and Connectors shows Ditto Connected. In a new Chat, type `/` and verify both skills
+appear under Ditto before sending your request.
+
+Claude Code has a separate plugin installation. A plugin visible in Code does not
+by itself mean it is installed in Chat. For **Claude Code**:
 
 ```text
 /plugin marketplace add ditto-assistant/ditto-claude-plugins
@@ -18,6 +25,12 @@ Complete Ditto sign-in using the host's MCP connection controls. In Claude Code,
 inspect the plugin-provided Ditto server in `/mcp`. Tool availability and UI differ
 by host; a plugin installation alone does not prove an authenticated connection.
 No npm helper, API-key entry in chat, or agent account is required by this package.
+
+The bundled skills are the verified Claude loading path. The hosted MCP server also
+offers the canonical skill files through `skills/list`, `skills/get` and
+`resources/read` for compatible importers. A successful MCP resource read does not
+prove Claude automatically activates connector-provided skills; keep the bundle
+installed. See the [host compatibility check](docs/host-compatibility.md).
 
 ## Shared skills
 
