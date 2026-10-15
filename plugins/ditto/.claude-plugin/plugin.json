@@ -1,8 +1,8 @@
 {
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "ditto",
-  "version": "0.2.4",
-  "description": "Turns Claude Code into Ditto: automatic memory recall on every prompt and write-back of salient turns, backed by your Ditto memory graph. Agent-native login means zero-OAuth setup. Includes Ditto-informed music curation; playlist creation and playback require separate music or computer-control capabilities.",
+  "version": "0.3.0",
+  "description": "Search and save Ditto memories through hosted MCP, recall supporting context, and curate music for your preferred service. Sign in through Claude. Playlist creation and playback require separate music capabilities.",
   "author": {
     "name": "Ditto (Omni Aura)",
     "email": "support@heyditto.ai",
@@ -17,8 +17,6 @@
     "memory",
     "recall",
     "knowledge-graph",
-    "mcp",
-    "hooks"
-  ],
-  "hooks": "./hooks/hooks.json"
+    "mcp"
+  ]
 }

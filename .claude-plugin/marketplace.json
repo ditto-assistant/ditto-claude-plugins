@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "ditto-claude-plugins",
-  "description": "Ditto's official Claude Code plugins — give Claude a persistent, personal memory graph with zero-OAuth agent-native login.",
+  "description": "Ditto's official Claude plugins \u2014 shared skills backed by the hosted Ditto MCP server.",
   "owner": {
     "name": "Ditto (Omni Aura)",
     "email": "support@heyditto.ai"
@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "ditto",
-      "description": "Turns Claude Code into Ditto: automatic memory recall on every prompt and write-back of salient turns, backed by your Ditto memory graph. Agent-native login via @heyditto/cli means setup is one command and never gets de-authorized like MCP OAuth.",
+      "description": "Connect Claude to Ditto memory through hosted MCP. Search saved context, save authorized notes, and curate music with shared skills. Sign in through Claude.",
       "author": {
         "name": "Ditto (Omni Aura)"
       },

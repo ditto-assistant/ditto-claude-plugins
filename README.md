@@ -1,54 +1,65 @@
-# ditto-claude-plugins
+# Ditto Claude plugins
 
-Ditto's official [Claude Code](https://code.claude.com) plugin marketplace. Give Claude a persistent, personal memory graph — with **agent-native login**, so setup is one command and never silently de-authorizes the way MCP OAuth can.
+Ditto's official Claude plugin marketplace. The Ditto plugin connects to the hosted
+Ditto MCP server at https://api.heyditto.ai/mcp for memory search, supporting context,
+and authorized private saves or updates. Sign in through Claude's connection flow.
 
 ## Install
 
-```
+In Claude desktop, add `ditto-assistant/ditto-claude-plugins` as a marketplace under
+Customize → Plugins, then add Ditto. In Claude Code:
+
+```text
 /plugin marketplace add ditto-assistant/ditto-claude-plugins
 /plugin install ditto@ditto-claude-plugins
 ```
 
-That's the whole setup — **no manual `npm install`**. On first run the plugin auto-installs the [`@heyditto/cli`](https://www.npmjs.com/package/@heyditto/cli) helper it drives into a contained cache dir (`~/.cache/heyditto/cli`, not a global install) and provisions a claimable agent account in the background. (Requires `npm` or `bun` on PATH; set `DITTO_AUTO_INSTALL=0` to opt out.)
+Complete Ditto sign-in using the host's MCP connection controls. In Claude Code,
+inspect the plugin-provided Ditto server in `/mcp`. Tool availability and UI differ
+by host; a plugin installation alone does not prove an authenticated connection.
+No npm helper, API-key entry in chat, or agent account is required by this package.
 
-## Plugins
+## Shared skills
 
-| Plugin | What it does |
-|---|---|
-| [**ditto**](plugins/ditto) | Turns Claude Code into Ditto: automatic memory **recall** on every prompt (`UserPromptSubmit` hook), **write-back** of salient turns (`Stop`/`PreCompact`), and zero-OAuth **agent-native login** on first run (`SessionStart`). Plus `/ditto-recall`, `/ditto-save`, `/ditto-whoami`, `/ditto-claim`, `/ditto-login`. |
+- `/ditto-memory`: recall evidence from saved memories and save or update useful
+  information within the user's authorized private memory workflow.
+- `/curate-music`: curate an ordered selection for the user's chosen music service
+  using verified Ditto context and an accessible saved library. Prefer service
+  connectors, then browser/computer controls, with web search last for recordings,
+  official service links and a playlist plan. Creation and playback require separate
+  music capabilities and verification; Ditto MCP does not provide music APIs.
 
-## How auth works (and why it's smooth)
+The plugin uses MCP for memory access. It has no CLI bootstrap, shell commands,
+lifecycle hooks, automatic prompt injection or transcript write-back. Update from
+0.2.x to remove the former plugin components; this update does not delete existing
+CLI installations, credentials, agent accounts or memories. Manage those separately
+if you previously used them. A running session may need a reload or restart.
 
-On first session, the plugin runs `ditto init --agent` — minting a free, **claimable** agent account. No browser, no OAuth dance, no token that expires mid-session. The `ditto_mcp_…` key is stored locally; you get a **claim URL** to later merge the agent's memories into your own Ditto account (`/ditto-claim`).
+## Update and validate
 
-Manage, pause, revoke, make read-only, or restrict which threads each agent can read from **Settings → Agents** on https://app.heyditto.ai.
+Refresh the marketplace and update Ditto in Claude's plugin controls. In Claude Code:
 
-## Updating
-
-- **CLI** (`@heyditto/cli`): the plugin auto-refreshes its contained install to `@latest` in the background (~weekly; `DITTO_REFRESH_DAYS`). Force it now with `/ditto-update`.
-- **Plugin** (this repo): `/plugin marketplace update ditto-claude-plugins` then `/reload-plugins`, or enable auto-update in `/plugin` → Marketplaces. Each release bumps `plugins/ditto/.claude-plugin/plugin.json` `version`.
-
-Maintainer release process: [RELEASING.md](RELEASING.md).
-
-## Repo layout
-
-```
-.claude-plugin/marketplace.json   # catalog (this marketplace)
-plugins/
-  ditto/
-    .claude-plugin/plugin.json     # plugin manifest
-    hooks/hooks.json               # SessionStart, UserPromptSubmit, Stop, PreCompact
-    hooks/ditto-hook.mjs           # the engine (calls the ditto CLI)
-    commands/                      # /ditto-recall, /ditto-save, /ditto-whoami, /ditto-claim, /ditto-login
-    skills/ditto-memory/SKILL.md   # deliberate-memory decision guide
+```text
+/plugin marketplace update ditto-claude-plugins
+/reload-plugins
 ```
 
-## License
+Maintainers: see [RELEASING.md](RELEASING.md) and [shared skills](docs/shared-skills.md).
+Run `python3 scripts/shared_skills.py verify --host claude --repo .`,
+`python3 -m unittest discover -s tests -v`, `python3 scripts/validate_package.py`,
+and `claude plugin validate ./plugins/ditto`.
 
-MIT — see [LICENSE](LICENSE).
+```text
+.claude-plugin/marketplace.json       # marketplace catalog
+plugins/ditto/.claude-plugin/plugin.json
+plugins/ditto/.mcp.json               # remote Ditto MCP, host-managed OAuth
+plugins/ditto/skills/                # generated shared skills
+adapters/ditto-memory.md             # Claude connection guidance
+```
 
-## Related
+Source, package validation, installed plugin, authenticated MCP and actual tool
+execution are separate verification steps. Nothing is submitted to a store by
+this repository's validation or distribution pipeline.
 
-- [`@heyditto/cli`](https://www.npmjs.com/package/@heyditto/cli) ([source](https://github.com/ditto-assistant/ditto-cli)) — the memory CLI the plugin drives.
-- [`ditto-clawhub`](https://github.com/ditto-assistant/ditto-clawhub) · [`ditto-hermes`](https://github.com/ditto-assistant/ditto-hermes) — sibling skill bundles for OpenClaw and Hermes.
-- [`ditto-mcp`](https://github.com/ditto-assistant/ditto-mcp) — stdio MCP bridge (browser-OAuth) for Claude Desktop / Cursor.
+Support: support@heyditto.ai · [Privacy](https://heyditto.ai/privacy) ·
+[Terms](https://heyditto.ai/terms). MIT — see [LICENSE](LICENSE).

@@ -17,7 +17,7 @@ jobs:
           python-version: '3.12'
       - name: Verify generated content and provenance
         run: python3 scripts/shared_skills.py verify --host claude --repo .
-      - name: Check host hook syntax
+      - name: Verify MCP-only package boundary
         run: |
-          node --check plugins/ditto/hooks/ditto-hook.mjs
-          node --check plugins/ditto/hooks/bootstrap.mjs
+          python3 -m unittest discover -s tests -v
+          python3 scripts/validate_package.py

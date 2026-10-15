@@ -4,9 +4,9 @@
   "source_commit": "7198a477e40cd946f124c337dbd084852aef8960",
   "host": "claude",
   "core_sha256": "5912af5483c469ec15db27858122fc9128fc25cd239202c0fdd9727de7dd5f6b",
-  "adapter_sha256": "5061fd56b1bb5c4c1237cf7514ea1d039118bcbbf6da7fe5946f8705aaeebe6c",
+  "adapter_sha256": "cbcbf06306758f7635891bc0b6b0169e0aee0ea8764eeded11935fc47c7f5c73",
   "generator_sha256": "8096bbb18946d0fa0841eb4abad47b4212a8c5e64e6f2f8be1c22621518e92a5",
-  "skill_sha256": "03b17997eb326e1f1d6c037c86e40348772440e752edb3da65ce12ba5ee08b3d",
+  "skill_sha256": "9c219625022999938ede690faa3178b13c4af5235d2212e90306d70c3fd3494e",
   "files_sha256": {
     "plugins/ditto/skills/curate-music/SKILL.md": "b498f8639aeb64e59f88830ac162a894f9f128b7e1f2db6a7c528092904c1eb4",
     "plugins/ditto/skills/curate-music/references/youtube-music.md": "e763797cc7821114682c7b92cec6919e6f957792cdc54756f670c7086b09e52c"
