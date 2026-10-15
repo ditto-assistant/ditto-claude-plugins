@@ -66,15 +66,17 @@ There are two independent things to keep current:
 
 ## Music curation
 
-The bundled `curate-youtube-music` skill uses verified Ditto memories and, when
-authorized access is available, your existing YouTube Music playlists to curate
-an original, ordered selection. Try: "Curate a YouTube Music playlist using my
+The bundled `curate-music` skill uses verified Ditto memories and, when
+authorized access is available, your existing playlists on the chosen music service to curate
+an original, ordered selection. Try: "Curate a music playlist using my
 Ditto memories for a relaxed evening, with a few discoveries."
 
 Creating or saving a playlist and controlling playback require a separately
 available music connector or supported computer/browser controls. If the host
 lacks those controls, the skill returns the ordered track selections and explains
-the limitation. The plugin does not add a Ditto music API or a music-account
+the limitation. It prefers a service connector, uses browser/computer controls
+next, and uses web search last for recording discovery, service links and a
+playlist plan. It honors your chosen service rather than switching providers. The plugin does not add a Ditto music API or a music-account
 connection. Queue replacement and playback changes follow your explicit request.
 
-Adapted from Omar Barazanji's `curate-youtube-music` skill in heyditto-stack PR #115.
+Adapted from Omar Barazanji's original music-curation skill in heyditto-stack PR #115.
