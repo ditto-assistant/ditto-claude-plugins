@@ -4,10 +4,17 @@ Connect Claude to your Ditto memory through the hosted MCP server at
 https://api.heyditto.ai/mcp. Sign in through Claude's connection controls; never
 paste API keys into chat. The package includes no CLI helper or lifecycle hooks.
 
-In Claude Code, install from the official Ditto repository:
+In Claude desktop, select Chat and Cowork, then open Customize → Plugins → Add →
+Add marketplace → Add from a repository. Select
+`ditto-assistant/ditto-claude-plugins`, Sync, and add Ditto. Verify the plugin is
+enabled and its Ditto connector is Connected. Chat/Cowork and Code have separate
+plugin installations.
+
+In Claude Code, install from the official Ditto marketplace:
 
 ```text
-/plugin install ditto --marketplace ditto-assistant/ditto-claude-plugins
+/plugin marketplace add ditto-assistant/ditto-claude-plugins
+/plugin install ditto@ditto-claude-plugins
 ```
 
 Use `/ditto-memory` to search memories, fetch supporting content, and save or

@@ -1,5 +1,12 @@
 # Releasing
 
+The 0.3.1 directory preparation release adds explicit listing metadata and the
+unchanged sculptural-D app icon from brand-kit tag `v2026.09.10`
+(`kit/png/ditto-app-icon-light-512.png`, SHA-256
+`08b3a41e1c0987fb585260bd85f3c02913494a490a0a732d81d7c257c61845c3`).
+MCP configuration and bundled skill bytes match the tested 0.3.0 release. Directory
+validation reads the exact submitted commit separately from local validation.
+
 The release contains hosted MCP connection metadata and shared skills. It does
 not distribute or refresh a CLI, run hooks or provision agent accounts.
 

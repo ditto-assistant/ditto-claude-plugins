@@ -20,7 +20,7 @@ def validate(root):
     expected = {"mcpServers": {"ditto": {"type": "http", "url": "https://api.heyditto.ai/mcp"}}}
     if json.loads((plugin / ".mcp.json").read_text()) != expected:
         raise ValueError("Expected hosted Ditto MCP without launcher, headers or credentials")
-    allowed = {".claude-plugin/plugin.json", ".mcp.json", "README.md", "shared-skills.lock.json"}
+    allowed = {".claude-plugin/plugin.json", ".claude-plugin/icon.png", ".mcp.json", "README.md", "shared-skills.lock.json"}
     count = 0
     for item in plugin.rglob("*"):
         if item.is_symlink():
