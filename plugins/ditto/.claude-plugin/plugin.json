@@ -1,10 +1,10 @@
 {
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "ditto",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Search and save Ditto memories through hosted MCP, recall supporting context, and curate music for your preferred service. Sign in through Claude. Playlist creation and playback require separate music capabilities.",
   "author": {
-    "name": "Ditto (Omni Aura)",
+    "name": "Omni Aura LLC",
     "email": "support@heyditto.ai",
     "url": "https://heyditto.ai"
   },
@@ -18,5 +18,11 @@
     "recall",
     "knowledge-graph",
     "mcp"
-  ]
+  ],
+  "displayName": "Ditto",
+  "icon": "./.claude-plugin/icon.png",
+  "documentationUrl": "https://github.com/ditto-assistant/ditto-claude-plugins/blob/main/plugins/ditto/README.md",
+  "supportUrl": "https://heyditto.ai/contact",
+  "privacyPolicyUrl": "https://heyditto.ai/privacy",
+  "termsOfServiceUrl": "https://heyditto.ai/terms"
 }

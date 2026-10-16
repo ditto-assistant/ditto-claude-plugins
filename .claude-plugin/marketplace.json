@@ -3,7 +3,7 @@
   "name": "ditto-claude-plugins",
   "description": "Ditto's official Claude plugins \u2014 shared skills backed by the hosted Ditto MCP server.",
   "owner": {
-    "name": "Ditto (Omni Aura)",
+    "name": "Omni Aura LLC",
     "email": "support@heyditto.ai"
   },
   "plugins": [
@@ -11,7 +11,7 @@
       "name": "ditto",
       "description": "Connect Claude to Ditto memory through hosted MCP. Search saved context, save authorized notes, and curate music with shared skills. Sign in through Claude.",
       "author": {
-        "name": "Ditto (Omni Aura)"
+        "name": "Omni Aura LLC"
       },
       "category": "productivity",
       "source": "./plugins/ditto",
