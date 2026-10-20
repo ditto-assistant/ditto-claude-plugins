@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source_repository": "https://github.com/ditto-assistant/ditto-skills",
-  "source_commit": "0daf7d7d26462beee33ea4cfc861801ab4ae199d",
+  "source_commit": "7cf6b8e920061897df9cfd92a0811a03a41919a7",
   "host": "claude",
   "core_sha256": "5912af5483c469ec15db27858122fc9128fc25cd239202c0fdd9727de7dd5f6b",
   "adapter_sha256": "cbcbf06306758f7635891bc0b6b0169e0aee0ea8764eeded11935fc47c7f5c73",
@@ -11,6 +11,6 @@
     "plugins/ditto/skills/curate-music/SKILL.md": "b498f8639aeb64e59f88830ac162a894f9f128b7e1f2db6a7c528092904c1eb4",
     "plugins/ditto/skills/curate-music/references/youtube-music.md": "e763797cc7821114682c7b92cec6919e6f957792cdc54756f670c7086b09e52c",
     "plugins/ditto/skills/handoff/SKILL.md": "10daeb5c9238083bad90d72c7931467436bbb9158e08f6a24b2c6f6eea3cce45",
-    "plugins/ditto/skills/handoff/references/workspace-cleanup.md": "31280ed4bab466c3fe6e193fe42178e4be3c9da94e259270e5c8ec0e603a540b"
+    "plugins/ditto/skills/handoff/references/workspace-cleanup.md": "6d105bcf59f48cef4dd7a7649dccf2d071a6378e59db55929239e0470e9809fc"
   }
 }

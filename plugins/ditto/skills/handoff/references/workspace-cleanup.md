@@ -19,8 +19,14 @@ worktrees. A clean `git status` omits ignored files. Separate reproducible build
 from unique fixtures, databases, uploads, screenshots, configuration and recovery
 material. Do not expose secrets. Never assume an ignored file is disposable.
 
-Before removing a checkout, commit and push valuable code through its delivery
-rules, open/update its PR and verify remote head against local commit. Read the
+Before removing a checkout, make valuable code durable through its delivery
+rules. Pushing code, creating a remote or opening/updating a PR requires existing
+user/repository authority for that action and destination; handoff or disk cleanup
+alone grants none. If authority or destination is missing, retain the checkout
+and ask for the exact preservation plan. Do not upload private work just to make
+cleanup possible. This deferral need not block a verified memory save or chat
+archive. When push/PR delivery is authorized, commit and push, open/update the PR
+and verify remote head against local commit. Read the
 PR's actual base, state, validated head and merge receipt. A merged PR does not
 prove later local changes landed; squash merges also mean branch-tip ancestry
 alone is insufficient. Open PRs stay by default. Closed/merged state is not
