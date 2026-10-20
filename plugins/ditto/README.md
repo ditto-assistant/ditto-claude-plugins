@@ -31,7 +31,14 @@ separate music capabilities; confirm the actual result before claiming success.
 Try: "Curate a playlist on my preferred music service using my Ditto memories for
 a relaxed evening, with a few discoveries."
 
-The shared skills respect your current instructions, private capture preferences,
+Use `/handoff` for verified private
+continuation notes and supported host archival, including explicitly selected
+bulk closeout. Disk assessment requires local tools; cleanup requires exact
+authority and verified code/file recovery. A memory summary is not a file backup.
+If this host cannot archive, the skill saves the handoff and explains the manual
+closeout step. Exiting Claude Code is not an archive operation.
+
+The plugin respects your current instructions, private capture preferences,
 source authorship and actual tool grants. The plugin does not automatically save
 transcripts or inject context at every prompt. Native chat listing/sending and
 music-account access are not supplied by this package. UI support depends on the

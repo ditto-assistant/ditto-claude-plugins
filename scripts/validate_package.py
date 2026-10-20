@@ -31,7 +31,7 @@ def validate(root):
         relative = item.relative_to(plugin)
         if relative.as_posix() not in allowed and not (relative.parts[0] == "skills" and item.suffix in {".md", ".json", ".yaml", ".yml", ".txt"}):
             raise ValueError(f"Unexpected release file: {relative}")
-    for name in ("ditto-memory", "curate-music"):
+    for name in ("ditto-memory", "curate-music", "handoff"):
         if not (plugin / "skills" / name / "SKILL.md").is_file():
             raise ValueError(f"Missing skill: {name}")
     return count
