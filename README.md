@@ -9,9 +9,9 @@ and authorized private saves or updates. Sign in through Claude's connection flo
 For **Claude Chat or Cowork**, select **Chat and Cowork** in Claude desktop first.
 Open Customize → Plugins → Add → Add marketplace → Add from a repository, select
 `ditto-assistant/ditto-claude-plugins`, and Sync. Add Ditto from that marketplace.
-Under Yours, verify Ditto is enabled, Skills lists `curate-music` and `ditto-memory`,
-and Connectors shows Ditto Connected. In a new Chat, type `/` and verify both skills
-appear under Ditto before sending your request.
+Under Yours, verify Ditto is enabled, Skills lists `curate-music`, `ditto-memory`
+and `handoff`, and Connectors shows Ditto Connected. In a new Chat, type `/` and
+verify all three skills appear under Ditto before sending your request.
 
 Claude Code has a separate plugin installation. A plugin visible in Code does not
 by itself mean it is installed in Chat. For **Claude Code**:
@@ -34,6 +34,10 @@ installed. See the [host compatibility check](docs/host-compatibility.md).
 
 ## Shared skills
 
+- `/handoff`: save continuation context to private Ditto memory and compare full
+  readback before archiving the current chat or an explicitly selected bulk set.
+  Assess disk pressure and recoverability of owned workspaces/build artifacts;
+  cleanup requires exact authorization. See [host limits](docs/handoff.md).
 - `/ditto-memory`: recall evidence from saved memories and save or update useful
   information within the user's authorized private memory workflow.
 - `/curate-music`: curate an ordered selection for the user's chosen music service
@@ -54,6 +58,7 @@ Refresh the marketplace and update Ditto in Claude's plugin controls. In Claude 
 
 ```text
 /plugin marketplace update ditto-claude-plugins
+/plugin update ditto@ditto-claude-plugins
 /reload-plugins
 ```
 

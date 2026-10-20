@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "ditto",
-      "description": "Connect Claude to Ditto memory through hosted MCP. Search saved context, save authorized notes, and curate music with shared skills. Sign in through Claude.",
+      "description": "Connect Claude to Ditto memory through hosted MCP. Recall context, save authorized notes, curate music and hand off chats with verified continuation notes. Sign in through Claude.",
       "author": {
         "name": "Omni Aura LLC"
       },
