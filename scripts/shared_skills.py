@@ -56,8 +56,8 @@ def catalog_names(source, catalog="memory"):
     if not config.exists() and catalog == "memory":
         return None
     catalogs = json.loads(config.read_text())
-    names = catalogs.get(catalog)
-    if not isinstance(names, list) or not names or len(set(names)) != len(names):
+    names = catalogs.get(catalog) if isinstance(catalogs, dict) else None
+    if not isinstance(names, list) or not names or any(not isinstance(name, str) for name in names) or len(set(names)) != len(names):
         raise ValueError("Unknown or invalid skill catalog")
     for name in names:
         if not isinstance(name, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", name):

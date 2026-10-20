@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "source_repository": "https://github.com/ditto-assistant/ditto-skills",
-  "source_commit": "50f2165a4e027f6c8a14cecd27c60980bc8f7afc",
+  "source_commit": "0daf7d7d26462beee33ea4cfc861801ab4ae199d",
   "host": "claude",
   "core_sha256": "5912af5483c469ec15db27858122fc9128fc25cd239202c0fdd9727de7dd5f6b",
   "adapter_sha256": "cbcbf06306758f7635891bc0b6b0169e0aee0ea8764eeded11935fc47c7f5c73",
-  "generator_sha256": "b9f7746a1fc1bf861ffbc47aaac86411ffc5442e9e3213fa0d6bd64c985cba79",
+  "generator_sha256": "f9482f4790b22608dfa16c279ba183f05dd651b69ed2b474c78068918bd95efc",
   "skill_sha256": "9c219625022999938ede690faa3178b13c4af5235d2212e90306d70c3fd3494e",
   "files_sha256": {
     "plugins/ditto/skills/curate-music/SKILL.md": "b498f8639aeb64e59f88830ac162a894f9f128b7e1f2db6a7c528092904c1eb4",
