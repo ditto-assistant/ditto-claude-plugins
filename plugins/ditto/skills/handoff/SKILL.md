@@ -75,13 +75,17 @@ If save or exact readback fails, leave that chat open and preserve code/files.
 Return the draft and the specific failure. Never put private handoffs in the
 skill repository or plugin package. A local note is not the Ditto save gate.
 
-## Reclaim only authorized, recoverable material
+## Reclaim only authorized material
 
 After successful readback, perform only cleanup already authorized for exact
-owned candidates and passing the cleanup reference's recovery gates. Otherwise
+owned candidates and passing the cleanup reference's preservation or discard gates. Otherwise
 present the measured scope for approval and retain the files. Archiving chats
 does not authorize deleting their workspaces. Cleanup failure does not invalidate
 a verified memory: report it separately and preserve a usable recovery path.
+Direct deletion without a recovery archive is a valid user choice. When the user
+asks to just delete, do not make an archive or backup a prerequisite. Verify
+remote durability for code being retained and identify any unique local material
+being discarded; do not infer permission to discard it from a memory summary.
 Save material cleanup outcomes/recovery locations into the handoff and verify
 that update before archiving.
 
